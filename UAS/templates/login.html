@@ -1,0 +1,10 @@
+<form method="post">
+    {% csrf_token %}
+    <label for="login_id">Login ID:</label>
+    <input type="text" name="login_id" id="login_id" required><br>
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" required><br>
+    <label for="role">Role:</label>
+    <input type="text" name="role" id="role" required><br>
+    <button type="submit">Login</button>
+</form>
