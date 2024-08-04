@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Program</title>
+</head>
+<body>
+    <h1>Delete Program</h1>
+    <form method="post" action="{% url 'delete_program_offered' program.id %}">
+        {% csrf_token %}
+        <p>Are you sure you want to delete the following program?</p>
+        <p><strong>Program Name:</strong> {{ program.ProgramName }}</p>
+        <p><strong>Description:</strong> {{ program.Description }}</p>
+        <p><strong>Applicant Eligibility:</strong> {{ program.Applicant_eligibility }}</p>
+        <p><strong>Duration:</strong> {{ program.Duration }}</p>
+        <p><strong>Degree Certificate Offered:</strong> {{ program.Degree_certificate_offered }}</p>
+        
+        <input type="hidden" name="ProgramId" value="{{ program.id }}">
+        <input type="submit" value="Delete Program">
+    </form>
+    <br>
+    <a href="{% url 'list_programs_offered' %}">Back to Programs List</a>
+</body>
+</html>

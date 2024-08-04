@@ -1,0 +1,126 @@
+body {
+    background-image: url('../images/artificial-intelligence-4694502_1280.jpg'); /* Replace with actual image */
+    background-size: cover;
+    background-position: center;
+    font-family: 'Quattrocento Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* .login-wrapper {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 900px;
+    width: 100%;
+} */
+
+.login-wrapper {
+    display: flex;
+    background: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Optional: Apply blur to the area behind the card */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 900px;
+    width: 100%;
+}
+
+.login-form {
+    padding: 40px;
+    max-width: 450px;
+    width: 100%;
+}
+
+.login-form .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.login-form .subtitle {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.login-form .info,
+.login-form .support {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.login-form .form-control {
+    margin-bottom: 20px;
+    padding: 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+
+.login-form .form-control {
+    margin-bottom: 20px;
+    padding: 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd; /* Border color */
+    background-color: transparent; /* Make the background transparent */
+    color: #333; /* Text color */
+    /* Ensure the text color is visible */
+}
+
+.login-form .form-control option {
+    background-color: #fff; /* Background color for options */
+    color: #333; /* Text color for options */
+}
+
+
+.login-form .btn {
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 25px;
+    background-color: #007bff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.login-form .btn:hover {
+    background-color: #0056b3;
+}
+
+.login-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(120deg, #a6c0fe, #f68084);
+    width: 100%;
+    max-width: 450px;
+    overflow: hidden;
+}
+
+.login-image img {
+    width: 230%;
+    height: auto;
+    object-fit: cover;
+}
+
+a {
+    color: #007bff;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #0056b3;
+}

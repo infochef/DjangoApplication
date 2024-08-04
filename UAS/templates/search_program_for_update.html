@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Program</title>
+</head>
+<body>
+    <h1>Search Program for Update</h1>
+    <form method="post" action="{% url 'programms:search_program_for_update' %}">
+        {% csrf_token %}
+        <label for="Description">Program Description:</label>
+        <input type="text" id="Description" name="Description">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if programs %}
+        <h2>Search Results</h2>
+        <ul>
+            {% for program in programs %}
+                <li><a href="{% url 'programms:update_program_offered' program_id=program.ProgramId %}">{{ program.ProgramName }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

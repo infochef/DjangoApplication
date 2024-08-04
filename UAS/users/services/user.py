@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 class UserService(ABC):
 
     @abstractmethod
-    def create_user(self, user_id, login_id, password, role, email, first_name, last_name):
+    def sign_up(self, user_id, login_id, password, role, email, first_name, last_name):
         pass
 
     @abstractmethod
@@ -28,4 +28,8 @@ class UserService(ABC):
 
     @abstractmethod
     def update_account_details(self, password, role, email, first_name, last_name):
+        pass
+    
+    @abstractmethod
+    def get_user_details(self, user_id):
         pass

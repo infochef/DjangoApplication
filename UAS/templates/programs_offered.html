@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Programs Offered</title>
+</head>
+<body>
+    <h1>Programs Offered</h1>
+    <table border="1">
+        <tr>
+            <th>Program ID</th>
+            <th>Program Name</th>
+            <th>Description</th>
+            <th>Applicant Eligibility</th>
+            <th>Duration</th>
+            <th>Degree Certificate Offered</th>
+        </tr>
+        {% for program in programs_offered %}
+        <tr>
+            <td>{{ program.ProgramId }}</td>
+            <td><a href="{% url 'programms:program_detail' program.ProgramId %}">{{ program.ProgramName }}</a></td>
+            <td>{{ program.Description }}</td>
+            <td>{{ program.Applicant_eligibility }}</td>
+            <td>{{ program.Duration }}</td>
+            <td>{{ program.Degree_certificate_offered }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

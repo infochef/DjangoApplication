@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forgot Login ID</title>
+</head>
+<body>
+    <h1>Forgot Login ID</h1>
+    <form method="post" action="{% url 'forgot_login_id' %}">
+        {% csrf_token %}
+        
+        <div>
+            <label for="current_login_id">Current Login ID:</label>
+            <input type="text" id="current_login_id" name="current_login_id" required>
+        </div>
+        <div>
+            <label for="new_login_id">New Login ID:</label>
+            <input type="text" id="new_login_id" name="new_login_id" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <label for="role">Role:</label>
+            <input type="text" id="role" name="role" required>
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+</html>

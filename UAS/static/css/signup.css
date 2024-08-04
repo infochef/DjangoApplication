@@ -1,0 +1,86 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background: url('../images/signup.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    padding-left: 5%;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 18px; /* Reduced font size for the heading */
+}
+
+.form-group {
+    margin-bottom: 8px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: bold;
+    font-size: 12px; /* Smaller font size for labels */
+}
+
+.form-group input {
+    width: 100%;
+    padding: 6px 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background: none;
+    font-size: 14px;
+}
+
+.form-group input:focus {
+    border-bottom: 2px solid #007BFF;
+    outline: none;
+}
+
+.form-group button {
+    width: 100%;
+    padding: 8px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-group button:hover {
+    background-color: #0056b3;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 8px;
+}
+
+.login-link a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}

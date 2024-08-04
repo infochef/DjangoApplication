@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Program</title>
+</head>
+<body>
+    <h1>Update Program</h1>
+    <form method="post" action="{% url 'programms:update_program_offered' program_id=program.ProgramId %}">
+        {% csrf_token %}
+        <label for="ProgramName">Program Name:</label>
+        <input type="text" id="ProgramName" name="ProgramName" value="{{ program.ProgramName }}">
+        <label for="Description">Description:</label>
+        <input type="text" id="Description" name="Description" value="{{ program.Description }}">
+        <label for="Applicant_eligibility">Applicant Eligibility:</label>
+        <input type="text" id="Applicant_eligibility" name="Applicant_eligibility" value="{{ program.Applicant_eligibility }}">
+        <label for="Duration">Duration:</label>
+        <input type="text" id="Duration" name="Duration" value="{{ program.Duration }}">
+        <label for="Degree_certificate_offered">Degree Certificate Offered:</label>
+        <input type="text" id="Degree_certificate_offered" name="Degree_certificate_offered" value="{{ program.Degree_certificate_offered }}">
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

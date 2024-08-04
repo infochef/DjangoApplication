@@ -6,10 +6,13 @@ from django.core.validators import validate_email
 from django.core.mail import BadHeaderError, send_mail
 from django.contrib.auth import authenticate, get_user_model, login as django_login
 from django.http import HttpResponse
-from django.utils.crypto import get_random_string
+from django.utils.crypto import get_random_stringsa
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from .user import UserService
 from ..models import Users
+
+logger = logging.getLogger(__name__)
 
 class UserServiceImpl(UserService):
 
@@ -17,7 +20,7 @@ class UserServiceImpl(UserService):
     User Creation Functionality
     ======================================
      """
-    def create_user(self, user_id, login_id, password, role, email, first_name, last_name):
+    def sign_up(self, user_id, login_id, password, role, email, first_name, last_name):
 
         # Perfor basic validation
         if not all([user_id, login_id, password, role, email, first_name, last_name]):
@@ -43,7 +46,7 @@ class UserServiceImpl(UserService):
         # Send confirmation email
         subject = 'Welcome to Our Service'
         message = f'Hi {first_name},\n\nThank you for registering. Your login ID is {login_id}.'
-        from_email = 'your_outlook_email@outlook.com'
+        from_email = ''
         try:
             send_mail(subject, message, from_email, [email])
             logger.info(f"Confirmation email sent to {email}")
@@ -93,7 +96,7 @@ class UserServiceImpl(UserService):
     ================================== 
     """
 
-    def user_login(self, login_id, password, role):
+    def user_login(self, request, login_id, password, role):
         try:
             # Validate inputs
             if not login_id or not password:
@@ -105,20 +108,19 @@ class UserServiceImpl(UserService):
                 raise ValidationError("Invalid data type for login ID or password.")
             
             # Authenticate user
-            UserModel = get_user_model()
-            user = authenticate(username=login_id, password=password)
+            user = authenticate(request=request, username=login_id, password=password)
             
             if user is None:
                 logger.error("Login error: Invalid login ID or password.")
                 raise ValidationError("Invalid login ID or password.")
             
             # Check if user role matches
-            if user.role != role:
+            if hasattr(user, 'role') and user.role != role:
                 logger.error(f"Login error: Role mismatch. Expected {role}, found {user.role}.")
                 raise ValidationError("Role does not match.")
 
             # Log in the user and create a session
-            django_login(self.request, user)
+            django_login(request, user)
             logger.info(f"User logged in successfully: {login_id}")
 
             # Optionally return user or response
@@ -136,7 +138,6 @@ class UserServiceImpl(UserService):
     Logout Functionality
     ================================== """
 
-    @login_required
     def user_logout(self, request):
         """
         Logs out the user and redirects to the home page.
@@ -267,7 +268,7 @@ class UserServiceImpl(UserService):
                 # Optionally send an email notification (if applicable)
                 subject = 'Password Reset Confirmation'
                 message = f'Hi {user.first_name},\n\nYour password has been reset successfully.'
-                from_email = 'your_outlook_email@outlook.com'
+                from_email = ''
                 try:
                     send_mail(subject, message, from_email, [user.email])
                     logger.info(f"Password reset confirmation email sent to {user.email}")
@@ -398,7 +399,7 @@ class UserServiceImpl(UserService):
         try:
             # Fetch the user by user_id
             UserModel = get_user_model()
-            user = UserModel.objects.filter(id=user_id).first()
+            user = UserModel.objects.filter(user_id=user_id).first()
 
             if user:
                 # Authenticate the user
@@ -434,3 +435,35 @@ class UserServiceImpl(UserService):
         except Exception as e:
             logger.error(f"Unexpected error: {e}")
             raise Exception(f"An unexpected error occurred: {e}")
+        
+
+    def get_user_details(self, user_id):
+        """
+        Fetch user details based on the provided user_id.
+
+        :param user_id: Unique identifier for the user.
+        :return: Dictionary with user details or None if user not found.
+        """
+        try:
+            UserModel = get_user_model()
+            user = UserModel.objects.get(user_id=user_id)
+
+            # Construct and return a dictionary with user details
+            user_details = {
+                'user_id': user.user_id,
+                'login_id': user.login_id,
+                'email': user.email,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'role': user.role,
+            }
+            logger.info(f"User details fetched successfully for user_id: {user_id}")
+            return user_details
+
+        except ObjectDoesNotExist:
+            logger.error(f"User not found with user_id: {user_id}")
+            return None
+
+        except Exception as e:
+            logger.error(f"Unexpected error during fetching user details: {e}")
+            raise Exception("An unexpected error occurred while fetching user details.")
